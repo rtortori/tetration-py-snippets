@@ -33,6 +33,8 @@ except:
 
 inventory_items = list()
 
+# Build Payload
+
 req_payload = {
     "scopeName": SCOPE_NAME,
     "limit": 10,
@@ -43,13 +45,11 @@ req_payload = {
                }
 }
 
-# Fetch all sensors matching the filter
-
 # Init objects list and set a dummy offset
 objects = []
 offset = 'init'
 
-# Iterate through all responses using offsets and build the conversation list
+# Iterate through all responses using offsets and build the inventory list based on payload filters
 while offset:
     resp = rc.post('/openapi/v1/inventory/search',
                    json_body=json.dumps(req_payload))
@@ -68,6 +68,8 @@ while offset:
     else:
         print('Response code is not 200: {}'.format(resp.status_code))
         break
+
+# Iterate through the objects and build the results JSON file
 
 for item in objects:
     packages = rc.get(
