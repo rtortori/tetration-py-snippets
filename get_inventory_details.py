@@ -94,7 +94,8 @@ for item in objects:
                 v3_score = "N/A"
             vuln_list.append({
                 "cve_id": vuln["cve_id"],
-                "v3_score": v3_score
+                "v3_score": v3_score,
+                "package_infos": vuln["package_infos"]
             })
     else:
         print('Response code is not 200: {}'.format(
